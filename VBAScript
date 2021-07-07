@@ -1,10 +1,10 @@
-Sub Stocks():
+Sub Calculate_Stock_Stats():
 
 Dim ticker As String
 Dim number_tickers As Integer
 Dim lastRowState As Long
-Dim opening_price As Double
-Dim closing_price As Double
+Dim open_price As Double
+Dim close_price As Double
 Dim yearly_change As Double
 Dim percent_change As Double
 Dim total_stock_volume As Double
@@ -30,7 +30,7 @@ For Each ws In Worksheets
     number_tickers = 0
     ticker = ""
     yearly_change = 0
-    opening_price = 0
+    open_price = 0
     percent_change = 0
     total_stock_volume = 0
     
@@ -41,8 +41,8 @@ For Each ws In Worksheets
         ticker = Cells(i, 1).Value
         
         
-        If opening_price = 0 Then
-            opening_price = Cells(i, 3).Value
+        If open_price = 0 Then
+            open_price = Cells(i, 3).Value
         End If
         
         
@@ -55,10 +55,10 @@ For Each ws In Worksheets
             Cells(number_tickers + 1, 9) = ticker
             
             
-            closing_price = Cells(i, 6)
+            close_price = Cells(i, 6)
             
             
-            yearly_change = closing_price - opening_price
+            yearly_change = close_price - open_price
             
             
             Cells(number_tickers + 1, 10).Value = yearly_change
@@ -76,10 +76,10 @@ For Each ws In Worksheets
             
             
             
-            If opening_price = 0 Then
+            If open_price = 0 Then
                 percent_change = 0
             Else
-                percent_change = (yearly_change / opening_price)
+                percent_change = (yearly_change / open_price)
             End If
             
             
@@ -87,7 +87,7 @@ For Each ws In Worksheets
             Cells(number_tickers + 1, 11).Value = Format(percent_change, "Percent")
                     
             
-            opening_price = 0
+            open_price = 0
             
             
             Cells(number_tickers + 1, 12).Value = total_stock_volume
